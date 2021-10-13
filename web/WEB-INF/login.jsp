@@ -13,7 +13,7 @@
     </head>
     <body>
         <h1>Login</h1>
-        <form method="POST" action="home">
+        <form method="POST" action="">
             <label>Username:</label>
             <input type="text" name="username" value="">
             <br>
@@ -21,9 +21,8 @@
             <input type="text" name="password" value="">
             <br>
             <input type="submit" name="login" value="Log in">
-            <br>
-            <label>${invalidInput}</label>
-            
+            <br>          
         </form>
+        <label>${invalidInput}</label>
     </body>
 </html>

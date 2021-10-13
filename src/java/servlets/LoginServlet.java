@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import models.User;
 import services.AccountServices;
 
 public class LoginServlet extends HttpServlet {
@@ -15,6 +16,8 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         
         getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request,response);
+        
+        return;
     }
 
     @Override
@@ -24,25 +27,27 @@ public class LoginServlet extends HttpServlet {
         AccountServices accountServices = new AccountServices();
         HttpSession session = request.getSession();
         
-        String username;
-        String password;
-        
-        username = request.getParameter("username");
-        password = request.getParameter("password");
-        
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+
         if(username == null || username.equals("") || password == null || password.equals("")) {
             getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request,response);
             request.setAttribute("invalidInput", "Please enter the correct username and password");
             
         } else {
-            accountServices.login(username, password);
-            if(accountServices != null) {
-            //might be wrong
-            session.setAttribute("usernameSession", username);
-            response.sendRedirect("/WEB-INF/login.js/");
+            if (accountServices.login(username, password) != null) {
+                //saving variable in a session variable
+                session.setAttribute("usernameSession", username);
+
+                
+                //redirecting
+                response.sendRedirect("/MyLogin/home");
+
             }
-            }
-        
+            
+        }
+
+        return;
     }
 
 }

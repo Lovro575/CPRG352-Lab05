@@ -14,12 +14,11 @@
     <body>
         <h1>Home Page</h1>
         <form method="POST" action="home">
-       <%-- - display the login info here
-            - only for the abe and barb 
-            - the password is always password --%>
-            <label>${usernameSession}</label>
+       <%-- Session object--%>
+            <label>Hello ${usernameSession}</label> 
+            <p> <a href="login">Log out</a> </p>
         </form>
-        <p> <a href="login">Log out</a> </p>
+        
 
     </body>
 </html>
