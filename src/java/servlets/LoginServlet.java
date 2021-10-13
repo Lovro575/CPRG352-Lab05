@@ -22,7 +22,7 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         
         AccountServices accountServices = new AccountServices();
-         HttpSession session = request.getSession();
+        HttpSession session = request.getSession();
         
         String username;
         String password;
@@ -31,12 +31,17 @@ public class LoginServlet extends HttpServlet {
         password = request.getParameter("password");
         
         if(username == null || username.equals("") || password == null || password.equals("")) {
+            getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request,response);
+            request.setAttribute("invalidInput", "Please enter the correct username and password");
+            
+        } else {
             accountServices.login(username, password);
             if(accountServices != null) {
             //might be wrong
-            session.getAttribute("username");
+            session.setAttribute("usernameSession", username);
+            response.sendRedirect("/WEB-INF/login.js/");
             }
-        }
+            }
         
     }
 
