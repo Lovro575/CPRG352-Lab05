@@ -13,10 +13,10 @@
     </head>
     <body>
         <h1>Home Page</h1>
-        <form method="POST" action="home">
+        <form method="POST" action="login">
        <%-- Session object--%>
             <label>Hello ${usernameSession}</label> 
-            <p> <a href="login">Log out</a> </p>
+            <div nam> <a href="login">Log out</a> </div>
         </form>
         
 

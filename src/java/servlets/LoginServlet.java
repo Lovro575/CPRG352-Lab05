@@ -31,21 +31,20 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password");
 
         if(username == null || username.equals("") || password == null || password.equals("")) {
+            request.setAttribute("invalidInput", "Failed authentication");
             getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request,response);
-            request.setAttribute("invalidInput", "Please enter the correct username and password");
             
-        } else {
-            if (accountServices.login(username, password) != null) {
-                //saving variable in a session variable
-                session.setAttribute("usernameSession", username);
+        }
+        if (accountServices.login(username, password) != null) {
+            //saving variable in a session variable
+            session.setAttribute("usernameSession", username);
 
-                
-                //redirecting
-                response.sendRedirect("/MyLogin/home");
+            //redirecting
+            response.sendRedirect("/MyLogin/home");
 
             }
             
-        }
+        
 
         return;
     }
