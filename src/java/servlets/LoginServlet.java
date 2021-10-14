@@ -34,6 +34,9 @@ public class LoginServlet extends HttpServlet {
             request.setAttribute("invalidInput", "Failed authentication");
             getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request,response);
             
+        } else if (accountServices.login(username, password) == null) {
+            request.setAttribute("invalidLogin", "Failed authentication");
+            getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request,response);
         }
         if (accountServices.login(username, password) != null) {
             //saving variable in a session variable
@@ -42,7 +45,7 @@ public class LoginServlet extends HttpServlet {
             //redirecting
             response.sendRedirect("/MyLogin/home");
 
-            }
+        }
             
         
 

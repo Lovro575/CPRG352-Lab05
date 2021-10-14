@@ -23,6 +23,6 @@
             <input type="submit" name="login" value="Log in">
             <br>          
         </form>
-        <label>${invalidInput}</label>
+        <label>${invalidInput} ${invalidLogin}</label>
     </body>
 </html>
