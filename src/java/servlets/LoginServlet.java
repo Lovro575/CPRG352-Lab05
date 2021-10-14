@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import models.User;
 import services.AccountServices;
 
 public class LoginServlet extends HttpServlet {
@@ -29,6 +28,7 @@ public class LoginServlet extends HttpServlet {
         
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        
 
         if(username == null || username.equals("") || password == null || password.equals("")) {
             request.setAttribute("invalidInput", "Failed authentication");
@@ -38,16 +38,14 @@ public class LoginServlet extends HttpServlet {
             request.setAttribute("invalidLogin", "Failed authentication");
             getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request,response);
         }
+        
         if (accountServices.login(username, password) != null) {
             //saving variable in a session variable
             session.setAttribute("usernameSession", username);
 
             //redirecting
             response.sendRedirect("/MyLogin/home");
-
         }
-            
-        
 
         return;
     }
